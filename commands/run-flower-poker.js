@@ -32,13 +32,17 @@ const flowers = [
 //   // Send new formated messageEmbed to public gambling channel
 // );
 
-module.exports = async (message, args) => {
+module.exports = async (msg, args) => {
+  if (msg.content.startsWith('$ bid')) {
 
-  let val1 = flowers[Math.floor(Math.random() * flowers.length)]
-  let val2 = flowers[Math.floor(Math.random() * flowers.length)]
-  let val3 = flowers[Math.floor(Math.random() * flowers.length)]
-  let val4 = flowers[Math.floor(Math.random() * flowers.length)]
-  let val5 = flowers[Math.floor(Math.random() * flowers.length)]
+    msg.delete();
 
-  message.channel.send(`\n ${val1}\n ${val2}\n ${val3}\n ${val4}\n ${val5}\n`);
+    let val1 = flowers[Math.floor(Math.random() * flowers.length)]
+    let val2 = flowers[Math.floor(Math.random() * flowers.length)]
+    let val3 = flowers[Math.floor(Math.random() * flowers.length)]
+    let val4 = flowers[Math.floor(Math.random() * flowers.length)]
+    let val5 = flowers[Math.floor(Math.random() * flowers.length)]
+
+    msg.channel.send(`\n ${val1}\n ${val2}\n ${val3}\n ${val4}\n ${val5}\n`);
+  }
 }

@@ -16,7 +16,6 @@
   "author": "John Marquez",
   "license": "ISC",
   "dependencies": {
-    "airtable": "^0.11.1",
     "axios": "^0.21.1",
     "discord-buttons": "^4.0.0",
     "discord-oauth2": "^2.6.0",

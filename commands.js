@@ -1,8 +1,10 @@
 const btc = require('./commands/coinmarketcap');
 const bid = require('./commands/run-flower-poker');
+const clear = require('./commands/bulk-delete');
+const ping = require('./commands/btc-pay-server');
 
 // jump table
-const commands = { btc, bid };
+const commands = { btc, bid, clear, ping };
 
 module.exports = async msg => {
   // If last message was from demon butler, remove public message
