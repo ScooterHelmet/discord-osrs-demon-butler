@@ -1,5 +1,5 @@
 const { MessageAttachment } = require("discord.js")
-const { MessageButton } = require("discord-buttons")
+const { MessageButton, MessageActionRow } = require("discord-buttons")
 const fs = require('fs')
 const path = require('path')
 
@@ -25,6 +25,19 @@ const flowers = [
   blackFlowers
 ];
 
+const button = new MessageButton()
+  .setStyle('grey')
+  .setLabel('play again')
+  .setID('click_to_function');
+
+const button2 = new MessageButton()
+  .setStyle('red')
+  .setLabel('double down')
+  .setID('click_to_doubledown');
+
+const row = new MessageActionRow()
+  .addComponents(button, button2);
+
 module.exports = async (msg, args) => {
   if (msg.content.startsWith('$ bid')) {
     msg.delete();
@@ -46,7 +59,6 @@ module.exports = async (msg, args) => {
     msg.channel.send(`3 ... ${msg.author}`, { files: [plant3] });
     msg.channel.send(`4 ... ${msg.author}`, { files: [plant4] });
     msg.channel.send(`5 ... ${msg.author}`, { files: [plant5] });
-    
     /**
      * TODO: MessageButton for a choices
      * Again

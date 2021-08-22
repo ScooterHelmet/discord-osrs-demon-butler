@@ -1,14 +1,13 @@
 const btc = require('./commands/coinmarketcap');
 const bid = require('./commands/run-flower-poker');
 const clear = require('./commands/bulk-delete');
-const ping = require('./commands/btc-pay-server');
+const ping = require('./commands/ping');
+const invoice = require('./commands/btc-pay-server')
 
 // jump table
-const commands = { btc, bid, clear, ping };
+const commands = { btc, bid, clear, invoice, ping };
 
 module.exports = async msg => {
-  // If last message was from demon butler, remove public message
-  let bot = msg.author.bot;
   if ((msg.channel.id) == '878066462445678593') {
 
     if (!msg.guild || msg.author.bot) return;
@@ -38,14 +37,6 @@ module.exports = async msg => {
       console.log('... on standby')
     }
   }
-
-
-  // if (msg.content.slice("$".length) > -1) {
-  //   const args = msg.content.slice("$".length).trim().split(" ");
-  //   const command = args.shift().toLowerCase();
-
-  //   commands[command](msg, args);
-  // }
 
   return;
 }

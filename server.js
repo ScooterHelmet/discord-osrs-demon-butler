@@ -1,22 +1,17 @@
 const { token } = require(`./config`);
-const Discord = require("discord.js");
-const { Client } = require("discord.js");
+const { Client } = require('discord.js');
 const client = new Client();
-
 const commandHandler = require("./commands");
-
 const os = require('os');
-const ifaces = os.networkInterfaces();        
+const ifaces = os.networkInterfaces();
 
-/**
- * Initialize Discord client
- */
-client.login(token);
 client.on("ready", () => {
   console.log(`\n Logged in as ${client.user.tag}`)
 });
 
 client.on("message", commandHandler);
+
+client.login(token);
 
 // Show IP address in console
 Object.keys(ifaces).forEach(function (ifname) {
