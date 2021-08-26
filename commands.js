@@ -2,7 +2,7 @@ const btc = require('./commands/coinmarketcap');
 const bid = require('./commands/run-flower-poker');
 const clear = require('./commands/bulk-delete');
 const ping = require('./commands/ping');
-const invoice = require('./commands/btc-pay-server')
+const invoice = require('./commands/btc-pay-server');
 
 // jump table
 const commands = { btc, bid, clear, invoice, ping };
@@ -27,10 +27,10 @@ module.exports = async msg => {
       // console.log(`Command: ${command}`);
 
       if ((command.charAt(0) === "$") && (tokens.length > 0)) {
-        command = command.substring(2);
+        args = command.substring(2);
 
-        console.log(`substring: ${command}`);
-        commands[command](msg, tokens);
+        console.log(`substring(2) args: ${args}`);
+        commands[args](msg, args);
       }
     } else {
 

@@ -1,18 +1,20 @@
+const exec = require('child_process').exec;
+
 let status = 'offline';
 let log;
 let output;
 let result;
 
-const exec = require('child_process').exec;
-process = (error, stdout, stderr) => {
+let process = (error, stdout, stderr) => {
   if (!error) {
-    status = `🤝 online`
+    status = `🤖 online`
   }
 
   log = error;
   output = stdout;
   result = stderr;
 }
+
 exec("ping -c 3 ubuntu", process);
 
 module.exports = async (msg, args) => {

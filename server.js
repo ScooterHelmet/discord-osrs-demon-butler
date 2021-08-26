@@ -1,19 +1,36 @@
-const { token } = require(`./config`);
-const { Client } = require('discord.js');
-const client = new Client();
 const commandHandler = require("./commands");
+const config = require(`./config`);
+const Discord = require('discord.js');
 const os = require('os');
 const ifaces = os.networkInterfaces();
 
+/**
+ * Reduce Bandwidth, CPU, RAM consumption with intents - Discord.js v13
+ */
+const intents = new Discord.Intents(32767); // Let's use all of them ...
+
+const client = new Discord.Client({ intents });
+
+/**
+ * Log bot credentials accessed
+ */
 client.on("ready", () => {
-  console.log(`\n Logged in as ${client.user.tag}`)
+  console.log(`\n Logged in as ${client.user.tag}`);
 });
 
-client.on("message", commandHandler);
+/**
+ * Set Dynamic commandhandler
+ */
+client.on("messageCreate", commandHandler);
 
-client.login(token);
+/**
+ * Login
+ */
+client.login(config.token);
 
-// Show IP address in console
+/**
+ * Show available internal addresses
+ */
 Object.keys(ifaces).forEach(function (ifname) {
   var alias = 0;
   ifaces[ifname].forEach(function (iface) {
@@ -31,3 +48,5 @@ Object.keys(ifaces).forEach(function (ifname) {
     ++alias;
   })
 })
+
+module.exports = client;

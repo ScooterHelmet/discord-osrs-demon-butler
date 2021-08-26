@@ -1,7 +1,8 @@
-const { MessageAttachment } = require("discord.js")
-const { MessageButton, MessageActionRow } = require("discord-buttons")
-const fs = require('fs')
-const path = require('path')
+const { MessageAttachment } = require("discord.js");
+const fs = require('fs');
+const path = require('path');
+// const client  = require('../server');
+const { MessageActionRow, MessageButton } = require('discord.js');
 
 const pastelFlowers = fs.readFileSync(path.join(__dirname, '../assets/pastelFlowers.png'))
 const redFlowers = fs.readFileSync(path.join(__dirname, '../assets/redFlowers.png'))
@@ -25,21 +26,42 @@ const flowers = [
   blackFlowers
 ];
 
-const button = new MessageButton()
-  .setStyle('grey')
-  .setLabel('play again')
-  .setID('click_to_function');
+const row = new MessageActionRow().addComponents(
+  new MessageButton()
+    .setCustomId("first")
+    .setLabel("primary")
+    .setStyle("PRIMARY"),
 
-const button2 = new MessageButton()
-  .setStyle('red')
-  .setLabel('double down')
-  .setID('click_to_doubledown');
+  new MessageButton()
+    .setCustomId("second")
+    .setLabel("secondary-bt")
+    .setStyle("SECONDARY"),
 
-const row = new MessageActionRow()
-  .addComponents(button, button2);
+  new MessageButton()
+    .setCustomId("third")
+    .setLabel("success")
+    .setStyle("SUCCESS"),
 
+  new MessageButton()
+    .setCustomId("fourth")
+    .setLabel("Danger")
+    .setStyle("DANGER"),
+
+  new MessageButton()
+    .setCustomId("fourth")
+    .setLabel("COINiD")
+    .setStyle("https://apps.apple.com/us/app/btc-testnet-wallet-for-coinid/id1367659583")
+);
+
+/**
+ * @param {*} client client
+ * @param {*} msg message
+ * @param {*} args args
+ */
 module.exports = async (msg, args) => {
-  if (msg.content.startsWith('$ bid')) {
+  console.log(`msg: ${msg}, args: ${args}`);
+
+  if (args === 'bid') {
     msg.delete();
 
     let val1 = flowers[Math.floor(Math.random() * flowers.length)]
@@ -59,12 +81,21 @@ module.exports = async (msg, args) => {
     msg.channel.send(`3 ... ${msg.author}`, { files: [plant3] });
     msg.channel.send(`4 ... ${msg.author}`, { files: [plant4] });
     msg.channel.send(`5 ... ${msg.author}`, { files: [plant5] });
-    /**
-     * TODO: MessageButton for a choices
-     * Again
-     * Stop
-     * Double down
-     * PVP
-     */
+
+    const m = await msg.channel.send({
+      content: "What have you? ...",
+      Comp: [row]
+    })
+
+    const iFilter = i => i.user.id === msg.author.id;
+
+    const collector = m.createMessageComponentCollector({ filter: iFilter, time: 60000});
+ 
+    collector.on('collect', async i => { 
+      if(i.customId==='first') {
+        //const role = i.member.roles.cache?.has('')
+        console.log('dookie')
+    }
+  })
   }
 }

@@ -7,5 +7,6 @@ module.exports = {
   clientID: process.env.DISCORD_CLIENT_ID,
   clientSecret: process.env.DISCORD_CLIENT_SECRET,
   token: process.env.DISCORD_BUILD_A_BOT_TOKEN,
+  prefix: "$",
   port: process.env.PORT
 };
