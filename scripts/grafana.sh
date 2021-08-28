@@ -20,3 +20,11 @@ sleep1
 
 sudo apt install grafana
 sleep1
+
+# Enable Grafana to start at boot
+sudo systemctl enable grafana-server
+sleep1
+
+# Start grafana
+sudo systemctl start grafana-server
+sleep1
